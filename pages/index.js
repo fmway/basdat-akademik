@@ -105,7 +105,13 @@ export default function Home() {
                     <Td>{el.email}</Td>
                     <Td className={styles.action}>
                       <Link className={styles.edit} href={"/form/" + el.nip}>Edit</Link>
-                      <Link href="" className={styles.delete} onClick={() => { setOpenModal(true); setNipDelete(el.nip); } }>Delete</Link></Td>
+                      <Link href="" className={styles.delete}
+                        onClick={e => {
+                          e.preventDefault();
+                          setOpenModal(true);
+                          setNipDelete(el.nip); 
+                        } }>
+                      Delete</Link></Td>
                   </Tr>
                 )}
               </Tbody>
