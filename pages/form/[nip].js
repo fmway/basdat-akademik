@@ -104,9 +104,9 @@ export default function Form() {
               </div>
               <div className={styles.inputBox}>
                 <label htmlFor="kode_pos" className={styles.details}>Kode Pos</label>
-                <select name="kode_pos" id="kode_pos" required defaultValue={kodePos != "" ? kodePos : "kode"}>
-                  <option disabled value={"kode"}>Kode Pos</option>
-                  {!loadPos && listPos.map(el => <option key={el.kode_pos} >{el.kode_pos}</option>)}
+                <select name="kode_pos" id="kode_pos" className={`${!edit ? 'readOnly': ''}`} required onChange= { e => setKodePos(e.currentTarget.value) }>
+                  <option disabled value={"kode"} selected>Kode Pos</option>
+                  {!loadPos && listPos.map(el => <option key={el.kode_pos} selected={el.kode_pos == kodePos} value={`${el.kode_pos}`}>{el.kode_pos}</option>)}
                 </select>
               </div>
               <div className={styles.inputBox}>
