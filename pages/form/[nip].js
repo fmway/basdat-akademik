@@ -134,8 +134,7 @@ export default function Form() {
               </div>
               <div className={styles.inputBox}>
                 <label htmlFor="kode_pos" className={styles.details}>Kode Pos</label>
-                {!loadPos &&
-                <Select defaultValue={{value: `${dosen.kode_pos}`, label: `${dosen.kode_pos}`}} onChange={setKodePos} isDisabled={!edit} options={listPos} styles={customStyles} /> }
+                <Select defaultValue={{value: `${dosen.kode_pos}`, label: `${dosen.kode_pos}`}} onChange={setKodePos} isLoading={loadPos} isDisabled={!edit} options={listPos} styles={customStyles} />
               </div>
               <div className={styles.inputBox}>
                 <label htmlFor="no_telp" className={styles.details}>Nomor Telepon</label>
