@@ -40,12 +40,13 @@
   width: 100%;
   padding: 10px 5px;
   margin: auto;
-  text-align: center;
+  text-align: right;
 }
 
 .modalDel > .actionDel > button {
   border: none;
-  margin: auto 15px;
+  margin-left: 15px;
+  padding: 7px;
   color: white;
   background-color: #007BFF;
   border-radius: 5px;

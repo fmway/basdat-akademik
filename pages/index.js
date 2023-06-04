@@ -62,7 +62,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.body}>
-        <Popup open={openModal} onClose={closeModal} closeOnDocumentClick={false} position="top center" contentStyle={{marginTop: 0}}>
+        <Popup open={openModal} onClose={closeModal} closeOnDocumentClick position="top center" contentStyle={{marginTop: 0}}>
           <div className={styles.modalDel}>
             <div className={styles.deleteMsg}>
               <span className={styles.loadDel}><RotatingLines strokeColor="white" strokeWidth="3" animationDuration="0.5" width="16" visible={loadDelete} /></span>
