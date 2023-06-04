@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Toggle } from '@/components/Toggle.js';
 import Select from 'react-select';
-import { ProgressBar } from 'react-loader-spinner';
+import { ProgressBar, FallingLines } from 'react-loader-spinner';
 
 export default function Form() {
   const customStyles = {

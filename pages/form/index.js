@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '@/styles/Form.module.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { FallingLines } from 'react-loader-spinner';
 
 export default function Form() {
   const [listPos, setListPos] = useState([]);
