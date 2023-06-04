@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import styles from '@/styles/Home.module.css';
+import { RotatingLines } from 'react-loader-spinner';
 
 
 
