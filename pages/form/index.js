@@ -51,7 +51,7 @@ export default function Form() {
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Tugas Basis Data (Kelompok 1)"/>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
         <title>Tambah Dosen</title>
       </Head>

@@ -59,7 +59,7 @@ export default function Home() {
         <title>Tabel Dosen</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Tugas Basis Data (Kelompok 1)"/>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       <div className={styles.body}>
         <Popup open={openModal} onClose={closeModal} closeOnDocumentClick position="top center" contentStyle={{marginTop: 0}}>
