@@ -62,13 +62,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.body}>
-        <Popup open={openModal} onClose={closeModal} position="top center">
+        <Popup open={openModal} onClose={closeModal} closeOnDocumentClick={false} position="top center" contentStyle={{marginTop: 0}}>
           <div className={styles.modalDel}>
             <div className={styles.deleteMsg}>
               <span className={styles.loadDel}><RotatingLines strokeColor="white" strokeWidth="3" animationDuration="0.5" width="16" visible={loadDelete} /></span>
               Apakah anda yakin ingin menghapusnya?</div>
             <div className={styles.actionDel}>
-              <button onClick={handleDelete}>Ya</button>
+              <button className={styles.red} onClick={handleDelete}>Ya</button>
               <button onClick={closeModal}>Tidak</button>
             </div>
           </div>

@@ -17,8 +17,10 @@
 }
 
 .modalDel {
-  background-color: yellow;
+  background-color: white;
   font-size: 16px;
+  border-radius: 5px;
+  padding: 20px;
 }
 
 .modalDel > .deleteMsg {
@@ -39,6 +41,34 @@
   padding: 10px 5px;
   margin: auto;
   text-align: center;
+}
+
+.modalDel > .actionDel > button {
+  border: none;
+  margin: auto 15px;
+  color: white;
+  background-color: #007BFF;
+  border-radius: 5px;
+}
+
+.modalDel > .actionDel > button.red {
+  background-color: #D9534F;
+}
+
+.modalDel > .actionDel > button:hover {
+  background-color: #009bff;
+}
+
+.modalDel > .actionDel > button:active {
+  background-color: #113fff;
+}
+
+.modalDel > .actionDel > button.red:hover {
+  background-color: #d9404f;
+}
+
+.modalDel > .actionDel > button.red:active {
+  background-color: #f1534f;
 }
 
 .container {
