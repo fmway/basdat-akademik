@@ -76,7 +76,6 @@ export default function Home() {
         <span className={styles.kelompok}>Kelompok 1</span>
         <h1>Tabel Dosen <RotatingLines strokeColor="red" strokeWidth="3" animationDuration="0.5" width="32" visible={load} /></h1>
         <div className={styles.container}>
-          {!load && (
             <Table className={styles.table}>
               <Thead>
                 <Tr>
@@ -107,7 +106,6 @@ export default function Home() {
                 )}
               </Tbody>
             </Table>
-          )} 
         </div>
         <div className={styles.buttonLeft}>
           <Link href="/form">Tambah Dosen</Link>
