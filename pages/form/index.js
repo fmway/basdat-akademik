@@ -2,7 +2,7 @@ import Head from 'next/head';
 import styles from '@/styles/Form.module.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { FallingLines } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
 
 export default function Form() {
   const [listPos, setListPos] = useState([]);
@@ -54,7 +54,11 @@ export default function Form() {
       </Head>
       <div className={styles.body}>
         <div className={styles.container}>
-          <div className={styles.title}>Tambah Dosen</div>
+          <div className={styles.title}>Tambah Dosen
+            <span className={styles.progress}>
+              <ProgressBar height="50" width="45" visible={loadSave} ariaLabel="progress-bar-loading" wrapperStyle={{}} wrapperClass="progress-bar-wrapper" borderColor = '#71b7e6' barColor = '#9b59b6' />
+            </span>
+          </div>
           <form onSubmit={handleSubmit}>
             <div className={styles.userDetails}>
               <div className={styles.inputBox}>
@@ -89,7 +93,7 @@ export default function Form() {
                 <textarea name="alamat" id="alamat" placeholder="Masukkan alamat..." required></textarea>
               </div>
               <div className={styles.button}>
-                <button type="submit" id="submit"> Tambah <FallingLines color="#9b59b6" width="30" visible={loadSave} ariaLabel='falling-lines-loading' /></button>
+                <button type="submit" id="submit">Tambah</button>
               </div>
             </div>
           </form>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Toggle } from '@/components/Toggle.js';
 import Select from 'react-select';
-import { ProgressBar, FallingLines } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
 
 export default function Form() {
   const customStyles = {
@@ -16,20 +16,20 @@ export default function Form() {
       height: '45px',
     }),
 
-    valueContainer: (provided, state) => ({
+    valueContainer: (provided, _state) => ({
       ...provided,
       height: '45px',
       padding: '0 2px',
     }),
 
-    input: (provided, state) => ({
+    input: (provided, _state) => ({
       ...provided,
       margin: '0px',
     }),
-    indicatorSeparator: state => ({
+    indicatorSeparator: _state => ({
       display: 'none',
     }),
-    indicatorsContainer: (provided, state) => ({
+    indicatorsContainer: (provided, _state) => ({
       ...provided,
       height: '45px',
     }),
@@ -115,7 +115,7 @@ export default function Form() {
         <div className={styles.container}>
           <div className={styles.title}>Edit Dosen {!loadDosen && <Toggle toggled={edit} setToggled={setEdit} />}
             <span className={styles.progress}>
-              <ProgressBar height="50" width="45" visible={loadDosen} ariaLabel="progress-bar-loading" wrapperStyle={{}} wrapperClass="progress-bar-wrapper" borderColor = '#71b7e6' barColor = '#9b59b6' />
+              <ProgressBar height="50" width="45" visible={loadDosen || loadSave} ariaLabel="progress-bar-loading" wrapperStyle={{}} wrapperClass="progress-bar-wrapper" borderColor = '#71b7e6' barColor = '#9b59b6' />
             </span>
           </div>
           <form onSubmit={handleSubmit}>
@@ -150,7 +150,7 @@ export default function Form() {
                 <textarea name="alamat" id="alamat" placeholder="Masukkan alamat..." required value={alamat} onInput={ e => setAlamat(e.currentTarget.value) } readOnly={!edit} />
               </div>
               <div className={styles.button}>
-                <button type="submit" id="submit"> Simpan <FallingLines color="#9b59b6" width="30" visible={loadSave} ariaLabel='falling-lines-loading' /></button>
+                <button type="submit" id="submit">Simpan</button>
               </div>
             </div>
           </form>
