@@ -45,7 +45,7 @@ export default function Home() {
       </Head>
       <div className={styles.body}>
         <span className={styles.kelompok}>Kelompok 1</span>
-        <h1>Tabel Dosen <RotatingLines strokeColor="grey" strokeWidth="2" animationDuration="0.5" width="32" visible={load} /></h1>
+        <h1>Tabel Dosen <RotatingLines strokeColor="red" strokeWidth="3" animationDuration="0.5" width="32" visible={load} /></h1>
         <div className={styles.container}>
           {!load && (
             <Table className={styles.table}>
