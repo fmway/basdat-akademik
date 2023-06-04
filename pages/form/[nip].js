@@ -37,7 +37,7 @@ export default function Form() {
       setEmail(dosen.email);
       setAlamat(dosen.alamat);
       setLoadDosen(false);
-    }).catch((e) => alert(e));
+    }).catch(() => push('/form'));
     fetch('/api/kodepos').then(res => res.json()).then(({ data }) => {
       setListPos(data);
       setLoadPos(false);
