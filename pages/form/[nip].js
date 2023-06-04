@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Toggle } from '@/components/Toggle.js';
 import Select from 'react-select';
+import { ProgressBar } from 'react-loader-spinner';
 
 export default function Form() {
   const customStyles = {
@@ -107,10 +108,11 @@ export default function Form() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Edit Dosen</title>
       </Head>
-      {!loadDosen &&
       <div className={styles.body}>
         <div className={styles.container}>
-          <div className={styles.title}>Edit Dosen <Toggle toggled={edit} setToggled={setEdit} /></div>
+          <div className={styles.title}>
+            <ProgressBar height="50" width="45" visible={loadDosen} ariaLabel="progress-bar-loading" wrapperStyle={{}} wrapperClass="progress-bar-wrapper" borderColor = '#71b7e6' barColor = '#9b59b6' />
+            Edit Dosen <Toggle toggled={edit} setToggled={setEdit} /></div>
           <form onSubmit={handleSubmit}>
             <div className={styles.userDetails}>
               <div className={styles.inputBox}>
@@ -149,7 +151,6 @@ export default function Form() {
           </form>
         </div>
       </div>
-      }
     </>
   );
 }
