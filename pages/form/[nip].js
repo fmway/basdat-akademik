@@ -3,40 +3,12 @@ import styles from '@/styles/Form.module.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Toggle } from '@/components/Toggle.js';
-import Select from 'react-select';
 import { ProgressBar } from 'react-loader-spinner';
 
-export default function Form() {
-  const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      background: state.isDisabled ? '#dadada' : '#fff', 
-      border: `1px solid ${state.isFocused ? '#9b59b6' : '#ccc'}`,
-      minHeight: '45px',
-      height: '45px',
-    }),
-
-    valueContainer: (provided, _state) => ({
-      ...provided,
-      height: '45px',
-      padding: '0 2px',
-    }),
-
-    input: (provided, _state) => ({
-      ...provided,
-      margin: '0px',
-    }),
-    indicatorSeparator: _state => ({
-      display: 'none',
-    }),
-    indicatorsContainer: (provided, _state) => ({
-      ...provided,
-      height: '45px',
-    }),
-  };
+export default function Form() { 
   const { push, query } = useRouter();
   const oldnip = query.nip;
-  const [listPos, setListPos] = useState([{ value: 'pos', label: 'Kode Pos', isDisabled: true }]);
+  const [listPos, setListPos] = useState([]);
   const [loadSave, setLoadSave] = useState(false);
   const [edit, setEdit] = useState(false);
   const [dosen, setDosen] = useState({});
@@ -67,14 +39,10 @@ export default function Form() {
       setLoadDosen(false);
     }).catch((e) => alert(e));
     fetch('/api/kodepos').then(res => res.json()).then(({ data }) => {
-      const listPos = [{ value: 'pos', label: 'Kode Pos', isDisabled: true }];
-      data.forEach((e) => {
-        listPos.push({value: `${e.kode_pos}`, label: `${e.kode_pos}`});
-      });
-      setListPos(listPos);
+      setListPos(data);
       setLoadPos(false);
     });
-  }, [loadDosen, loadPos, kodePos]);
+  }, [loadDosen, loadPos]);
 
   /**
   * @param e {Event}
@@ -136,7 +104,10 @@ export default function Form() {
               </div>
               <div className={styles.inputBox}>
                 <label htmlFor="kode_pos" className={styles.details}>Kode Pos</label>
-                <Select defaultValue={{value: `${dosen.kode_pos == undefined ? 'pos' : dosen.kode_pos}`, label: `${dosen.kode_pos == undefined ? 'Kode Pos': dosen.kode_pos}`, isDisabled: dosen.kode_pos == undefined}} onChange={setKodePos} isLoading={loadPos} isDisabled={!edit} options={listPos} styles={customStyles} />
+                <select name="kode_pos" id="kode_pos" required defaultValue={kodePos != "" ? kodePos : "kode"}>
+                  <option disabled value={"kode"}>Kode Pos</option>
+                  {!loadPos && listPos.map(el => <option key={el.kode_pos} >{el.kode_pos}</option>)}
+                </select>
               </div>
               <div className={styles.inputBox}>
                 <label htmlFor="no_telp" className={styles.details}>Nomor Telepon</label>
