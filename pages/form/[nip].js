@@ -110,9 +110,10 @@ export default function Form() {
       </Head>
       <div className={styles.body}>
         <div className={styles.container}>
-          <div className={styles.title}>Edit Dosen
+          <div className={styles.progress}>
             <ProgressBar height="50" width="45" visible={loadDosen} ariaLabel="progress-bar-loading" wrapperStyle={{}} wrapperClass="progress-bar-wrapper" borderColor = '#71b7e6' barColor = '#9b59b6' />
-            {!loadDosen && <Toggle toggled={edit} setToggled={setEdit} />}
+          </div>
+          <div className={styles.title}>Edit Dosen {!loadDosen && <Toggle toggled={edit} setToggled={setEdit} />}
           </div>
           <form onSubmit={handleSubmit}>
             <div className={styles.userDetails}>
