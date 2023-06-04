@@ -65,7 +65,7 @@ export default function Home() {
         <Popup open={openModal} onClose={closeModal} closeOnDocumentClick position="top center" contentStyle={{marginTop: 0}}>
           <div className={styles.modalDel}>
             <div className={styles.deleteMsg}>
-              <span className={styles.loadDel}><RotatingLines strokeColor="white" strokeWidth="3" animationDuration="0.5" width="16" visible={loadDelete} /></span>
+              <span className={styles.loadDel}><RotatingLines strokeColor="grey" strokeWidth="3" animationDuration="0.5" width="16" visible={loadDelete} /></span>
               Apakah anda yakin ingin menghapusnya?</div>
             <div className={styles.actionDel}>
               <button className={styles.red} onClick={handleDelete}>Ya</button>
