@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model dosen {
+  nip                               String       @id @db.VarChar(18)
+  nama                              String?      @db.VarChar(40)
+  tanggal_lahir                     DateTime?    @db.Date
+  alamat                            String?      @db.Text
+  kode_pos                          Int?
+  no_telp                           String?      @db.VarChar(14)
+  email                             String?      @db.VarChar(50)
+  kode_pos_dosen_kode_posTokode_pos kode_pos?    @relation("dosen_kode_posTokode_pos", fields: [kode_pos], references: [kode_pos], onDelete: NoAction, onUpdate: NoAction, map: "dosen_ibfk_1")
+  mahasiswa                         mahasiswa[]
+  matakuliah                        matakuliah[]
+
+  @@index([kode_pos], map: "kode_pos")
+}
+
+model hobi {
+  kode_hobi String     @id @db.VarChar(6)
+  nama_hobi String?    @db.VarChar(20)
+  nim       String?    @db.VarChar(8)
+  mahasiswa mahasiswa? @relation(fields: [nim], references: [nim], onDelete: NoAction, onUpdate: NoAction, map: "hobi_ibfk_1")
+
+  @@index([nim], map: "nim")
+}
+
+model kode_pos {
+  kode_pos                               Int         @id
+  alamat_kecamatan                       String?     @db.VarChar(40)
+  alamat_kotakab                         String?     @db.VarChar(40)
+  alamat_provinsi                        String?     @db.VarChar(40)
+  dosen_dosen_kode_posTokode_pos         dosen[]     @relation("dosen_kode_posTokode_pos")
+  mahasiswa_mahasiswa_kode_posTokode_pos mahasiswa[] @relation("mahasiswa_kode_posTokode_pos")
+}
+
+model kontrak_kuliah {
+  kode_kontrak    String      @id @db.VarChar(6)
+  nim             String?     @db.VarChar(8)
+  kode_matakuliah String?     @db.VarChar(6)
+  mahasiswa       mahasiswa?  @relation(fields: [nim], references: [nim], onDelete: NoAction, onUpdate: NoAction, map: "kontrak_kuliah_ibfk_1")
+  matakuliah      matakuliah? @relation(fields: [kode_matakuliah], references: [kode_matakuliah], onDelete: NoAction, onUpdate: NoAction, map: "kontrak_kuliah_ibfk_2")
+
+  @@index([kode_matakuliah], map: "kode_matakuliah")
+  @@index([nim], map: "nim")
+}
+
+model mahasiswa {
+  nim                                   String           @id @db.VarChar(8)
+  nama                                  String?          @db.VarChar(40)
+  tanggal_lahir                         DateTime?        @db.Date
+  alamat                                String?          @db.Text
+  kode_pos                              Int?
+  no_telp                               String?          @db.VarChar(15)
+  program_studi                         String?          @db.VarChar(50)
+  nip                                   String?          @db.VarChar(18)
+  email                                 String?          @db.VarChar(50)
+  hobi                                  hobi[]
+  kontrak_kuliah                        kontrak_kuliah[]
+  kode_pos_mahasiswa_kode_posTokode_pos kode_pos?        @relation("mahasiswa_kode_posTokode_pos", fields: [kode_pos], references: [kode_pos], onDelete: NoAction, onUpdate: NoAction, map: "mahasiswa_ibfk_1")
+  dosen                                 dosen?           @relation(fields: [nip], references: [nip], onDelete: NoAction, onUpdate: NoAction, map: "mahasiswa_ibfk_2")
+
+  @@index([kode_pos], map: "kode_pos")
+  @@index([nip], map: "nip")
+}
+
+model matakuliah {
+  kode_matakuliah String           @id @db.VarChar(6)
+  nama_matakuliah String?          @db.VarChar(50)
+  sks             Int?
+  semester        String?          @db.VarChar(8)
+  nip             String?          @db.VarChar(18)
+  kontrak_kuliah  kontrak_kuliah[]
+  dosen           dosen?           @relation(fields: [nip], references: [nip], onDelete: NoAction, onUpdate: NoAction, map: "matakuliah_ibfk_1")
+
+  @@index([nip], map: "nip")
+}

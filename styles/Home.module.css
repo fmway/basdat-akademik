@@ -1,0 +1,140 @@
+.body {
+  height: 100vh;
+  width: 100vw;
+  /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
+  background: linear-gradient(210deg, rgba(34, 193, 195, 1), rgba(240, 45, 253, 1));
+  padding: 10px;
+}
+
+img.loading {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.body h1 {
+  text-align: center;
+  color: rgba(240, 0, 0, .9);
+}
+
+.body .kelompok {
+  color: #00ffff;
+  font-size: 11px;
+}
+
+.container {
+  /* background: #fff; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.buttonLeft {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-end;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.container table.table {
+  border-radius: 5px;
+  border-collapse: separate;
+  padding: 3px;
+  background: #fff;
+  border: 1px solid blue;
+  align-self: stretch;
+  border-spacing: 0;
+  font-size: 16px;
+}
+
+.container .table th {
+  background: #000;
+  color: #fff;
+}
+
+.container .table tr {
+  background: #cfedff;
+}
+
+.container .table th,
+.container .table td {
+  pointer-events: auto;
+  border: 1px solid #fff;
+  padding: 8px;
+}
+
+.container .table tr:hover {
+  background-color: #cfddef;
+}
+
+.container .table td:hover {
+  background-color: #cffbff;
+}
+
+.container .table .pos,
+.container .table .action {
+  text-align: center;
+}
+
+.buttonLeft a {
+  background-color: #9addff;
+  padding: 10px;
+  border-radius: 6px;
+  border-color: none;
+}
+
+.container .edit,
+.container .delete {
+  padding: 3px 7px;
+  margin: auto 5px;
+  border-radius: 25%;
+  font-size: 16px;
+  border: none;
+}
+
+.container .edit {
+  background-color: #994fc9;
+}
+
+.container .delete {
+  background-color: red;
+}
+
+.container .edit:hover {
+  background-color: #cf4fc9;
+}
+
+.container .delete:hover {
+  background-color: rgb(200, 0, 0);
+  color: #fafafa;
+}
+
+.container .edit:active,
+.container .delete:active {
+  background-color: #fff;
+  color: #000;
+}
+
+.buttonLeft a:hover {
+  background-color: #cfedff;
+  color: #000;
+}
+
+.buttonLeft a:active {
+  background-color: #cfddff;
+}
+
+@media (max-width: 1040px) {
+  .container {
+    max-width: 100%;
+    overflow-x:scroll;
+  }
+}
+
+@media (max-width: 640px) {
+  .body {
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+}
