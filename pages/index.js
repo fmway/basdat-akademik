@@ -5,6 +5,7 @@ import { Table, Tbody, Td, Th, Thead, Tr } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import styles from '@/styles/Home.module.css';
 import { RotatingLines } from 'react-loader-spinner';
+import Popup from 'reactjs-popup';
 
 
 
@@ -12,20 +13,37 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(true);
   const [delet, setDelet] = useState(false);
+  const [nipDelete, setNipDelete] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+  const [loadDelete, setLoadDelete] = useState(false);
   
+  const closeModal = () => { 
+    setOpenModal(false); 
+    setNipDelete('');
+    setLoadDelete(false);
+  };
+
   /**
   * @param nip {string}
   * */
-  const handleDelete = async (nip) => {
-    const res = await fetch('/api/dosen/' + nip, {
-      method: 'DELETE'
-    });
-    if(res.ok) {
-      setDelet(true);
+  const handleDelete = () => {
+    if(nipDelete != '') {
+      setLoadDelete(true);
+      fetch('/api/dosen/' + nipDelete, {
+        method: 'DELETE'
+      }).then(res => {
+        closeModal();
+        if(res.ok) {
+          setDelet(true);
+        }
+      }).catch(() => closeModal());
+    } else {
+      closeModal();
     }
   };
 
   useEffect(() => {
+    setLoad(true);
     fetch('/api/dosen').then(res => res.json()).then(res => {
       if(res.data && data != res.data) {
         setData(res.data);
@@ -44,6 +62,17 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.body}>
+        <Popup open={openModal} onClose={closeModal} position="top center">
+          <div className={styles.modalDel}>
+            <div className={styles.deleteMsg}>
+              <span className={styles.loadDel}><RotatingLines strokeColor="white" strokeWidth="3" animationDuration="0.5" width="16" visible={loadDelete} /></span>
+              Apakah anda yakin ingin menghapusnya?</div>
+            <div className={styles.actionDel}>
+              <button onClick={handleDelete}>Ya</button>
+              <button onClick={closeModal}>Tidak</button>
+            </div>
+          </div>
+        </Popup>
         <span className={styles.kelompok}>Kelompok 1</span>
         <h1>Tabel Dosen <RotatingLines strokeColor="red" strokeWidth="3" animationDuration="0.5" width="32" visible={load} /></h1>
         <div className={styles.container}>
@@ -71,7 +100,9 @@ export default function Home() {
                     <Td className={styles.pos}>{el.kode_pos}</Td>
                     <Td>{el.no_telp}</Td>
                     <Td>{el.email}</Td>
-                    <Td className={styles.action}><Link className={styles.edit} href={"/form/" + el.nip}>Edit</Link><Link href="" className={styles.delete} onClick={() => handleDelete(el.nip)}>Delete</Link></Td>
+                    <Td className={styles.action}>
+                      <Link className={styles.edit} href={"/form/" + el.nip}>Edit</Link>
+                      <Link href="" className={styles.delete} onClick={() => { setOpenModal(true); setNipDelete(el.nip); } }>Delete</Link></Td>
                   </Tr>
                 )}
               </Tbody>

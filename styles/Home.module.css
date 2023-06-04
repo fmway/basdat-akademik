@@ -6,12 +6,6 @@
   padding: 10px;
 }
 
-img.loading {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-}
-
 .body h1 {
   text-align: center;
   color: rgba(240, 0, 0, .9);
@@ -20,6 +14,30 @@ img.loading {
 .body .kelompok {
   color: #00ffff;
   font-size: 11px;
+}
+
+.modalDel {
+  font-size: 16px;
+}
+
+.modalDel > .deleteMsg {
+  width: 100%;
+  position: relative;
+  font-size: 20px;
+  text-align: center;
+  padding: 5px;
+}
+
+.modalDel > .dleleteMsg > .loadDel {
+  position: absolute;
+  left: 0;
+}
+
+.modalDel > .actionDel {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
 }
 
 .container {

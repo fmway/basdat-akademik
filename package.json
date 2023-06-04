@@ -25,6 +25,7 @@
     "react-dom": "18.2.0",
     "react-select": "^5.7.3",
     "react-super-responsive-table": "^5.2.1",
-    "react-loader-spinner": "^5.3.4"
+    "react-loader-spinner": "^5.3.4",
+    "reactjs-popup": "^2.0.5";
   }
 }
