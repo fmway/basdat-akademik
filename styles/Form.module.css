@@ -13,6 +13,13 @@
   background: #fff;
   padding: 25px 30px;
   border-radius: 5px;
+  position: relative;
+}
+
+.container .progress {
+  position: relative;
+  top: 0;
+  right: 0;
 }
 
 .container .title {
@@ -27,7 +34,7 @@
   left: 0;
   bottom: 0;
   height: 3px;
-  width: 30px;
+  width: 50px;
   background:linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
