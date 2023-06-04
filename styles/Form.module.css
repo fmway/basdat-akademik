@@ -106,7 +106,7 @@ form .button {
   margin: 15px 0;
 }
 
-form .button input {
+form .button button {
   height: 100%;
   width: 100%;
   outline: none;
@@ -120,11 +120,11 @@ form .button input {
   transition: all .3s ease;
 }
 
-.button input:hover {
+.button button:hover {
   background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
 
-.button input:active {
+.button button:active {
   background: linear-gradient(180deg, #71b7e6, #9b59b6);
 }
 

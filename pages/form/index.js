@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 export default function Form() {
   const [listPos, setListPos] = useState([]);
   const [loadPos, setLoadPos] = useState(true);
+  const [loadSave, setLoadSave] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function Form() {
   * */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoadSave(true);
 
     const data = {
       nip: String(e.target.nip.value),
@@ -37,6 +39,7 @@ export default function Form() {
       },
       body: JSON.stringify(data)
     });
+    setLoadSave(false);
     router.push('/');
   };
 
@@ -85,7 +88,7 @@ export default function Form() {
                 <textarea name="alamat" id="alamat" placeholder="Masukkan alamat..." required></textarea>
               </div>
               <div className={styles.button}>
-                <input name="submit" type="submit" id="submit" value="Tambah" />
+                <button type="submit" id="submit"> Tambah <FallingLines color="#9b59b6" width="30" visible={loadSave} ariaLabel='falling-lines-loading' /></button>
               </div>
             </div>
           </form>

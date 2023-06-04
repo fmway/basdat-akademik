@@ -37,6 +37,7 @@ export default function Form() {
   const { push, query } = useRouter();
   const oldnip = query.nip;
   const [listPos, setListPos] = useState([{ value: 'pos', label: 'Kode Pos', isDisabled: true }]);
+  const [loadSave, setLoadSave] = useState(false);
   const [edit, setEdit] = useState(false);
   const [dosen, setDosen] = useState({});
   const [nip, setNip] = useState('');
@@ -80,6 +81,7 @@ export default function Form() {
   * */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoadSave(true);
 
     const data = {
       nip: String(nip || dosen.nip),
@@ -97,6 +99,7 @@ export default function Form() {
       },
       body: JSON.stringify(data)
     });
+    setLoadSave(false);
     push('/');
   };
 
@@ -147,7 +150,7 @@ export default function Form() {
                 <textarea name="alamat" id="alamat" placeholder="Masukkan alamat..." required value={alamat} onInput={ e => setAlamat(e.currentTarget.value) } readOnly={!edit} />
               </div>
               <div className={styles.button}>
-                <input name="submit" type="submit" id="submit" value="Simpan" />
+                <button type="submit" id="submit"> Simpan <FallingLines color="#9b59b6" width="30" visible={loadSave} ariaLabel='falling-lines-loading' /></button>
               </div>
             </div>
           </form>
