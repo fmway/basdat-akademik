@@ -74,7 +74,11 @@ export default function Home() {
           </div>
         </Popup>
         <span className={styles.kelompok}>Kelompok 1</span>
-        <h1>Tabel Dosen <RotatingLines strokeColor="red" strokeWidth="3" animationDuration="0.5" width="32" visible={load} /></h1>
+        <h1>Tabel Dosen
+          <span className={styles.loading}>
+            <RotatingLines strokeColor="red" strokeWidth="3" animationDuration="0.5" width="32" visible={load} />
+          </span>
+        </h1>
         <div className={styles.container}>
             <Table className={styles.table}>
               <Thead>
