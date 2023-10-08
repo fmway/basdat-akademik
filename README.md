@@ -1,4 +1,4 @@
 # basdat-akademik
 
 > [!NOTE]
-> This repo will migrate from ReactJS to Deno Fresh
+> This repo will migrate from Next JS to Deno Fresh
