@@ -8,10 +8,11 @@ export default function App({ Component }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Tugas Basis Data (Kelompok 1)"/>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="/styles.css" />
-        <link rel="stylesheet" href="/toggle.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
       </head>
-      <body>
+      <body style={{fontFamily: "Poppins"}}>
         <Component />
       </body>
     </html>
