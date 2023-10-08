@@ -1,18 +1,13 @@
-import { d, Dongoose } from "https://deno.land/x/dongoose@1.0.2/mod.ts";
 import { z } from "https://deno.land/x/zod@v3.21.4/mod.ts";
 import { 
-  kvdex,
-  model,
-  collection, 
-  indexableCollection, 
-  largeCollection,
+  kvdex, 
+  indexableCollection,
 } from "https://deno.land/x/kvdex@v0.18.1/mod.ts";
-import { walk } from "https://deno.land/std@0.173.0/fs/walk.ts";
 
 export const kv = await Deno.openKv();
 
-type Dosen = z.infer<typeof DosenModel>;
-type KodePos = z.infer<typeof KodePosModel>;
+// type Dosen = z.infer<typeof DosenModel>;
+// type KodePos = z.infer<typeof KodePosModel>;
 
 const DosenModel = z.object({
   nip: z.string().max(18).describe("unique"),
@@ -25,10 +20,10 @@ const DosenModel = z.object({
 });
 
 const KodePosModel = z.object({
-  kodePos: d.string().max(5).describe("unique"),
-  alamatKecamatan: d.string().max(40),
-  alamatKotaKab: d.string().max(40),
-  alamatProvinsi: d.string().max(40),
+  kodePos: z.string().max(5).describe("unique"),
+  alamatKecamatan: z.string().max(40),
+  alamatKotaKab: z.string().max(40),
+  alamatProvinsi: z.string().max(40),
 });
 
 const db = kvdex(kv, {
@@ -188,7 +183,14 @@ interface DosenResult {
   kodePos: string,
   noTelp: string,
   email: string,
-}
+};
+
+interface KodePosResult {
+  kodePos: string,
+  alamatKecamatan: string,
+  alamatKotaKab: string,
+  alamatProvinsi: string,
+};
 
 export const showDosen: () => Promise<DosenResult[]> = async () => {
   const dosen = await db.dosens.getMany();
@@ -206,6 +208,70 @@ export const showDosen: () => Promise<DosenResult[]> = async () => {
   });
 }
 
-console.log(await showDosen());
+export const showKodePos: () => Promise<KodePosResult[]> = async () => {
+  const kodePos = await db.kodepos.getMany();
+  return kodePos.result.map(x => {
+    const { kodePos, alamatKecamatan, alamatKotaKab, alamatProvinsi } = x.value;
+
+    return {
+      kodePos,
+      alamatKecamatan,
+      alamatKotaKab,
+      alamatProvinsi,
+    };
+  });
+};
+
+export const searchDosen: (nip: string) => Promise<DosenResult> = async (nip) => {
+  const dosen = await db.dosens.findByPrimaryIndex("nip", nip);
+
+  if (!dosen) {
+    throw Error("Nip tidak ditemukan");
+  }
+
+  return {
+    nip: dosen.value.nip,
+    nama: dosen.value.nama,
+    noTelp: dosen.value.noTelp,
+    kodePos: dosen.value.kodePos,
+    email: dosen.value.email,
+    alamat: dosen.value.alamat,
+    tanggalLahir: dosen.value.tanggalLahir,
+  };
+}
+
+export const updateDosen: (nip: string, obj: Partial<DosenResult>) => Promise<{ ok: boolean }> = async (nip, obj) => {
+  const result = await db.dosens.updateByPrimaryIndex("nip", nip, obj);
+  return { ok: result.ok };
+}
+
+export const addDosen: (obj: DosenResult) => Promise<{ ok: boolean }> = async (obj) => {
+  const result = await db.dosens.add(obj);
+  return { ok: result.ok };
+}
+
+export const deleteDosen: (nip: string) => Promise<void> = async (nip) => {
+  return await db.dosens.deleteByPrimaryIndex("nip", nip);
+}
 
 
+// await deleteDosen("88282");
+// await addDosen({
+//   nip: "88282",
+//   nama: "anuan",
+//   noTelp: "928398223",
+//   kodePos: "53254",
+//   email: "email@upi.edu",
+//   alamat: "alamatku",
+//   tanggalLahir: new Date(),
+// })
+
+// await updateDosen("920200119900825113", {
+//   nama: "Nur Wachid",
+// });
+
+// console.log(await db.dosens.updateByPrimaryIndex("nip", "920200119900825113", {
+  // nama: "Mohamad Fikri",
+// }));
+
+console.dir(await showDosen());
