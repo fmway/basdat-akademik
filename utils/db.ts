@@ -6,8 +6,8 @@ import {
 
 export const kv = await Deno.openKv();
 
-// type Dosen = z.infer<typeof DosenModel>;
-// type KodePos = z.infer<typeof KodePosModel>;
+export type Dosen = z.infer<typeof DosenModel>;
+export type KodePos = z.infer<typeof KodePosModel>;
 
 const DosenModel = z.object({
   nip: z.string().max(18).describe("unique"),
@@ -18,6 +18,7 @@ const DosenModel = z.object({
   kodePos: z.string().max(5),
   noTelp: z.string().max(14),
 });
+
 
 const KodePosModel = z.object({
   kodePos: z.string().max(5).describe("unique"),
@@ -175,24 +176,7 @@ await db.dosens.addMany([
   },
 ]);
 
-interface DosenResult {
-  nip: string,
-  nama: string,
-  tanggalLahir: Date,
-  alamat: string,
-  kodePos: string,
-  noTelp: string,
-  email: string,
-};
-
-interface KodePosResult {
-  kodePos: string,
-  alamatKecamatan: string,
-  alamatKotaKab: string,
-  alamatProvinsi: string,
-};
-
-export const showDosen: () => Promise<DosenResult[]> = async () => {
+export const showDosen: () => Promise<Dosen[]> = async () => {
   const dosen = await db.dosens.getMany();
   return dosen.result.map(x => {
     const { nip, nama, tanggalLahir, alamat, kodePos, noTelp, email } = x.value;
@@ -208,7 +192,7 @@ export const showDosen: () => Promise<DosenResult[]> = async () => {
   });
 }
 
-export const showKodePos: () => Promise<KodePosResult[]> = async () => {
+export const showKodePos: () => Promise<KodePos[]> = async () => {
   const kodePos = await db.kodepos.getMany();
   return kodePos.result.map(x => {
     const { kodePos, alamatKecamatan, alamatKotaKab, alamatProvinsi } = x.value;
@@ -222,7 +206,7 @@ export const showKodePos: () => Promise<KodePosResult[]> = async () => {
   });
 };
 
-export const searchDosen: (nip: string) => Promise<DosenResult> = async (nip) => {
+export const searchDosen: (nip: string) => Promise<Dosen> = async (nip) => {
   const dosen = await db.dosens.findByPrimaryIndex("nip", nip);
 
   if (!dosen) {
@@ -240,12 +224,12 @@ export const searchDosen: (nip: string) => Promise<DosenResult> = async (nip) =>
   };
 }
 
-export const updateDosen: (nip: string, obj: Partial<DosenResult>) => Promise<{ ok: boolean }> = async (nip, obj) => {
+export const updateDosen: (nip: string, obj: Partial<Dosen>) => Promise<{ ok: boolean }> = async (nip, obj) => {
   const result = await db.dosens.updateByPrimaryIndex("nip", nip, obj);
   return { ok: result.ok };
 }
 
-export const addDosen: (obj: DosenResult) => Promise<{ ok: boolean }> = async (obj) => {
+export const addDosen: (obj: Dosen) => Promise<{ ok: boolean }> = async (obj) => {
   const result = await db.dosens.add(obj);
   return { ok: result.ok };
 }
@@ -274,4 +258,4 @@ export const deleteDosen: (nip: string) => Promise<void> = async (nip) => {
   // nama: "Mohamad Fikri",
 // }));
 
-console.dir(await showDosen());
+// console.dir(await showDosen());
